@@ -1,4 +1,5 @@
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import HomeScreen from './views/HomeScreen';
@@ -57,6 +58,21 @@ function Main({ theme }) {
             Settings: SettingsTab
         },
         {
+            navigationOptions: ({ navigation }) => ({
+                tabBarIcon: ({ focused, tintColor }) => {
+                    const { routeName } = navigation.state
+                    let iconName
+                    if( routeName === 'Notes' )
+                        iconName = `ios-paper${focused ? '' : '-outline'}`
+                    else if( routeName === 'Todo' )
+                        // iconName = `md-checkmark-circle${focused ? '' : '-outline'}`
+                        iconName = `ios-list${focused ? '' : '-outline'}`
+                    else if( routeName === 'Settings' )
+                        iconName = `ios-settings${focused ? '' : '-outline'}`
+
+                    return <Ionicons name={iconName} size={25} color={tintColor} />
+                }
+            }),
             tabBarOptions: {
                 activeBackgroundColor: theme.primary,
                 inactiveBackgroundColor: theme.primary,

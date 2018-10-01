@@ -130,7 +130,7 @@ class TodoListScreen extends Component {
                         title='Priority:'
                         selectedValue={this.state.priority}
                         onValueChange={value => this.handlePicker( value )}
-                        options={[1, 2, 3, 4, 5]}
+                        options={[1, 2, 3]}
                         theme={this.props.theme}
                     />
                 </MidnightModal>

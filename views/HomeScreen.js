@@ -110,7 +110,7 @@ class HomeScreen extends Component {
                         title='Indent Level:'
                         selectedValue={this.state.indentLevel}
                         onValueChange={value => this.handlePicker( value )}
-                        options={[1, 2, 3, 4, 5]}
+                        options={[1, 2, 3]}
                         theme={this.props.theme}
                     />
                 </MidnightModal>

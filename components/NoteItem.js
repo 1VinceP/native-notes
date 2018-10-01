@@ -16,7 +16,9 @@ function NoteItem({ noteData, navigation, deleteNote, theme }) {
             elevation: 5,
             borderWidth: 1,
             borderColor: '#0006',
-            borderTopWidth: 0
+            borderTopWidth: 0,
+            paddingLeft: 30,
+            paddingRight: 30
         },
 
         textStyle: {
@@ -27,28 +29,30 @@ function NoteItem({ noteData, navigation, deleteNote, theme }) {
         deleteStyle: {
             borderWidth: 1,
             borderRadius: 3,
-            borderColor: theme.color+'44',
+            borderColor: theme.color + '44',
             paddingLeft: 6,
-            paddingRight: 6
+            paddingRight: 4,
+            color: theme.color,
+            alignItems: 'center',
+            justifyContent: 'center'
         }
     })
     const { containerStyle, textStyle, deleteStyle } = styles
 
-    const padding = {
-        paddingLeft: noteData.indent * 30,
-        paddingRight: 30
+    const margin = {
+        marginLeft: -180 + ( (noteData.indent - 1) * 40 )
     }
 
     return (
         <TouchableOpacity
-            style={[containerStyle, padding]}
+            style={containerStyle}
             onPress={() => navigation( noteData )}
         >
             <TouchableWithoutFeedback onPress={() => deleteNote( noteData.id )}>
-                <Text style={[textStyle, deleteStyle]}>
-                    <Ionicons name='ios-trash-outline' size={18} color={theme.color} /> {noteData.title}
-                </Text>
+                <Text style={deleteStyle}><Ionicons name='ios-trash-outline' size={26} color={theme.color} /></Text>
             </TouchableWithoutFeedback>
+
+            <Text style={[textStyle, margin]}>{noteData.title}</Text>
             <Text style={textStyle}>></Text>
         </TouchableOpacity>
     )

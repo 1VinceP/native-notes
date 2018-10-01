@@ -6,6 +6,7 @@ const initialState = {
 const CREATE_TODO = 'CREATE_TODO'
     , HANDLE_COMPLETE = 'HANDLE_COMPLETE'
     , DELETE_TODO = 'DELETE_TODO'
+    , DELETE_ALL_TODOS = 'DELETE_ALL_TODOS'
 
 export default ( state = initialState, action ) => {
     switch( action.type ) {
@@ -28,6 +29,10 @@ export default ( state = initialState, action ) => {
         case DELETE_TODO: {
             let todos = state.todos.filter( todo => todo.id !== action.payload )
             return { ...state, todos }
+        }
+
+        case DELETE_ALL_TODOS: {
+            return { ...state, todos: [], id: 1 }
         }
 
         default:
@@ -63,5 +68,13 @@ export function deleteTodo( id ) {
     return {
         type: DELETE_TODO,
         payload: id
+    }
+}
+
+export function deleteAllTodos() {
+
+    return {
+        type: DELETE_ALL_TODOS,
+        payload: null
     }
 }

@@ -6,6 +6,7 @@ const initialState = {
 const ADD_NOTE = 'ADD_NOTE'
     , SAVE_DETAILS = 'SAVE_DETAILS'
     , DELETE_NOTE = 'DELETE_NOTE'
+    , DELETE_ALL_NOTES = 'DELETE_ALL_NOTES'
 
 export default ( state = initialState, action ) => {
     switch( action.type ) {
@@ -28,6 +29,10 @@ export default ( state = initialState, action ) => {
         case DELETE_NOTE: {
             let notes = state.notes.filter( note => note.id !== action.payload )
             return {...state, notes}
+        }
+
+        case DELETE_ALL_NOTES: {
+            return { ...state, notes: [], id: 1 }
         }
 
         default:
@@ -64,5 +69,13 @@ export function deleteNote( id ) {
     return {
         type: DELETE_NOTE,
         payload: id
+    }
+}
+
+export function deleteAllNotes() {
+
+    return {
+        type: DELETE_ALL_NOTES,
+        payload: null
     }
 }

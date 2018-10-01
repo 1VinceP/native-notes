@@ -1,8 +1,23 @@
 import React from 'react';
 import { View, Text, Picker, StyleSheet } from 'react-native';
-import colors from '../../colors';
 
-function MidnightPicker({ title, options, selectedValue, onValueChange }) {
+function MidnightPicker({ title, options, selectedValue, onValueChange, theme }) {
+    const styles = StyleSheet.create({
+        containerStyle: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center'
+        },
+
+        titleStyle: {
+            color: theme.color
+        },
+
+        pickerStyle: {
+            width: '50%',
+            color: theme.color
+        },
+    })
     const { containerStyle, titleStyle, pickerStyle, pickerItemStyle } = styles
 
     let items = options.map( item => {
@@ -23,21 +38,5 @@ function MidnightPicker({ title, options, selectedValue, onValueChange }) {
     )
 }
 
-const styles = StyleSheet.create({
-    containerStyle: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-
-    titleStyle: {
-        color: colors.color
-    },
-
-    pickerStyle: {
-        width: '50%',
-        color: colors.color
-    },
-})
 
 export { MidnightPicker };

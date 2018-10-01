@@ -2,7 +2,23 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import colors from '../../colors';
 
-function MidnightButton({ title, onPress }) {
+function MidnightButton({ title, onPress, theme }) {
+    const styles = StyleSheet.create({
+        buttonStyle: {
+            flex: 1,
+            height: 30,
+            margin: 3,
+            backgroundColor: theme.secondary,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 3
+        },
+
+        textStyle: {
+            fontSize: 14,
+            color: theme.color
+        }
+    })
     const { buttonStyle, textStyle } = styles
 
     return (
@@ -12,21 +28,5 @@ function MidnightButton({ title, onPress }) {
     )
 }
 
-const styles = StyleSheet.create({
-    buttonStyle: {
-        flex: 1,
-        height: 30,
-        margin: 3,
-        backgroundColor: colors.primeAlt,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 3
-    },
-
-    textStyle: {
-        fontSize: 14,
-        color: colors.color
-    }
-})
 
 export { MidnightButton }

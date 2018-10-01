@@ -4,7 +4,6 @@ import { addNote } from '../redux/notesReducer';
 import { View, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import { MidnightPicker, FloatingPlus, MidnightModal } from '../components/common';
 import NoteItem from '../components/NoteItem';
-import colors from '../colors';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -54,8 +53,26 @@ class HomeScreen extends Component {
     };
 
     render() {
-        const { containerStyle, inputStyle } = styles;
+        const styles = StyleSheet.create({
+            containerStyle: {
+                flex: 1,
+                backgroundColor: this.props.theme.screenBg,
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+            textStyle: {
+                fontSize: 22
+            },
 
+            inputStyle: {
+                height: 50,
+                fontSize: 20,
+                padding: 10,
+                color: this.props.theme.color
+            },
+        });
+
+        const { containerStyle, inputStyle } = styles;
         return (
             <View style={containerStyle}>
                 <FlatList
@@ -67,6 +84,7 @@ class HomeScreen extends Component {
                             noteData={note}
                             navigation={note => this.navigation( note.id )}
                             id={note.id}
+                            theme={this.props.theme}
                         />
                     ) }
                 />
@@ -78,13 +96,14 @@ class HomeScreen extends Component {
                     title='New note'
                     handleSave={(title, indent) => this.saveNote( title, indent )}
                     handleClose={method => this.handleClose( method )}
+                    theme={this.props.theme}
                 >
                     <TextInput
                         style={inputStyle}
                         placeholder='Note Title'
                         value={this.state.title}
                         onChangeText={text => this.handleTitle(text)}
-                        underlineColorAndroid={colors.primeAlt}
+                        underlineColorAndroid={this.props.theme.secondary}
                         autoFocus
                     />
                     <MidnightPicker
@@ -92,40 +111,24 @@ class HomeScreen extends Component {
                         selectedValue={this.state.indentLevel}
                         onValueChange={value => this.handlePicker( value )}
                         options={[1, 2, 3, 4, 5]}
+                        theme={this.props.theme}
                     />
                 </MidnightModal>
 
-                <FloatingPlus onPress={() => this.handleModal()} />
+                <FloatingPlus onPress={() => this.handleModal()} theme={this.props.theme} />
             </View>
         );
     };
 };
 
-const styles = StyleSheet.create({
-    containerStyle: {
-        flex: 1,
-        backgroundColor: colors.screenBg,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textStyle: {
-        fontSize: 22
-    },
-
-    inputStyle: {
-        height: 50,
-        fontSize: 20,
-        padding: 10,
-        color: '#fff'
-    },
-});
-
 function mapStateToProps( state ) {
     const { notes, id } = state.notes;
+    const { theme } = state.theme;
 
     return {
         notes,
-        id
+        id,
+        theme
     };
 };
 

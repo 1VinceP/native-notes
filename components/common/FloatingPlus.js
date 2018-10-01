@@ -1,9 +1,26 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-import colors from '../../colors'
+function FloatingPlus({ onPress, theme }) {
+    let styles = StyleSheet.create({
+        buttonStyle: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 65,
+            height: 65,
+            backgroundColor: theme.secondary,
+            borderRadius: 100,
+            elevation: 5,
+            position: 'absolute',
+            bottom: 12,
+            right: 12
+        },
 
-function FloatingPlus({ onPress }) {
+        textStyle: {
+            color: '#fff',
+            fontSize: 24
+        }
+    })
     const { buttonStyle, textStyle } = styles
 
     return (
@@ -13,24 +30,5 @@ function FloatingPlus({ onPress }) {
     )
 }
 
-let styles = StyleSheet.create({
-    buttonStyle: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 65,
-        height: 65,
-        backgroundColor: colors.primeAlt,
-        borderRadius: 100,
-        elevation: 5,
-        position: 'absolute',
-        bottom: 12,
-        right: 12
-    },
-
-    textStyle: {
-        color: '#fff',
-        fontSize: 24
-    }
-})
 
 export { FloatingPlus }

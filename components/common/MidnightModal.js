@@ -8,10 +8,40 @@ import {
 } from 'react-native';
 import { MidnightButton } from './index';
 
-import colors from '../../colors';
+function MidnightModal({ visible, title, handleClose, handleSave, handleModal, children, theme }) {
+    const styles = StyleSheet.create({
+        modalStyle: {
+            height: '100%',
+            width: '100%',
+            backgroundColor: '#0008',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
 
-function MidnightModal({ visible, title, handleClose, handleSave, handleModal, children }) {
+        containerStyle: {
+            minHeight: 260,
+            width: '80%',
+            backgroundColor: theme.screenBg,
+            elevation: 5,
+            justifyContent: 'space-between'
+        },
 
+        titleStyle: {
+            height: 40,
+            backgroundColor: theme.secondary,
+            justifyContent: 'center',
+            paddingLeft: 10
+        },
+        titleText: {
+            color: '#fff',
+            fontSize: 24
+        },
+
+        buttonContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+        }
+    })
     const { modalStyle, containerStyle, titleStyle, titleText, buttonContainer } = styles
 
     return (
@@ -29,8 +59,8 @@ function MidnightModal({ visible, title, handleClose, handleSave, handleModal, c
                     {children}
 
                     <View style={buttonContainer}>
-                        <MidnightButton title='Save' onPress={() => handleClose( handleSave )} />
-                        <MidnightButton title='Cancel' onPress={() => handleClose( handleModal )} />
+                        <MidnightButton title='Save' onPress={() => handleClose( handleSave )} theme={theme} />
+                        <MidnightButton title='Cancel' onPress={() => handleClose( handleModal )} theme={theme} />
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -38,38 +68,5 @@ function MidnightModal({ visible, title, handleClose, handleSave, handleModal, c
     )
 }
 
-const styles = StyleSheet.create({
-    modalStyle: {
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#0008',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    containerStyle: {
-        minHeight: 260,
-        width: '80%',
-        backgroundColor: colors.screenBg,
-        elevation: 5,
-        justifyContent: 'space-between'
-    },
-
-    titleStyle: {
-        height: 40,
-        backgroundColor: colors.primeAlt,
-        justifyContent: 'center',
-        paddingLeft: 10
-    },
-    titleText: {
-        color: '#fff',
-        fontSize: 24
-    },
-
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    }
-})
 
 export { MidnightModal };

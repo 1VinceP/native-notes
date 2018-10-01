@@ -1,16 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { TouchableWithoutFeedback, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { handleComplete, deleteTodo } from '../redux/todoReducer';
-import colors from '../colors';
 
-function TodoItem({ todoData, completed = false, handleComplete, deleteTodo }) {
+function TodoItem({ todoData, completed = false, handleComplete, deleteTodo, theme }) {
 
     const styles = StyleSheet.create({
         containerStyle: {
             width: '100%',
             height: 40,
-            backgroundColor: !completed ? colors.primeAlt : colors.primeAlt+'55',
+            backgroundColor: !completed ? theme.secondary : theme.secondary+'55',
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
@@ -23,30 +23,37 @@ function TodoItem({ todoData, completed = false, handleComplete, deleteTodo }) {
         },
 
         textStyle: {
-            color: !completed ? '#fff' : '#fffa',
-            fontSize: 18
+            color: !completed ? theme.color : theme.color+'aa',
+            fontSize: 18,
+            borderWidth: 1,
+            borderRadius: 3,
+            borderColor: theme.color+'44',
+            paddingLeft: 6,
+            paddingRight: 6
         }
     })
     const { containerStyle, textStyle } = styles
-
-    let priority
-    switch( todoData.priority ) {
-        case '1':
-            priority = 'High'
-    }
-
-    console.log( priority )
 
     return (
         <TouchableOpacity
             style={containerStyle}
             onPress={() => handleComplete( todoData.id )}
-            onLongPress={() => deleteTodo( todoData.id )}
-            delayLongPress={100}
         >
-            <Text style={textStyle}>{todoData.title} {priority}</Text>
+            <TouchableWithoutFeedback onPress={() => deleteTodo( todoData.id )}>
+                <Text style={textStyle}>
+                    <Ionicons name='ios-trash-outline' size={18} color={theme.color} /> {todoData.title} ({todoData.priority})
+                </Text>
+            </TouchableWithoutFeedback>
         </TouchableOpacity>
     )
 }
 
-export default connect( null, { handleComplete, deleteTodo } )(TodoItem);
+function mapStateToProps( state ) {
+    const { theme } = state.theme;
+
+    return {
+        theme
+    };
+}
+
+export default connect( mapStateToProps, { handleComplete, deleteTodo } )(TodoItem);

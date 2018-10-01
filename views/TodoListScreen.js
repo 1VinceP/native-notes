@@ -44,6 +44,40 @@ class TodoListScreen extends Component {
     }
 
     render() {
+        const styles = StyleSheet.create({
+            containerStyle: {
+                flex: 1,
+                backgroundColor: this.props.theme.screenBg,
+                alignItems: 'center',
+                justifyContent: 'center',
+            },
+
+            listStyle: {
+                width: '100%',
+                height: '50%'
+            },
+
+            divider: {
+                width: '100%',
+                height: 30,
+                backgroundColor: this.props.theme.primary,
+                justifyContent: 'center',
+                alignItems: 'center',
+                elevation: 1
+            },
+
+            dividerText: {
+                fontSize: 14,
+                color: this.props.theme.tintColor
+            },
+
+            inputStyle: {
+                height: 50,
+                fontSize: 20,
+                padding: 10,
+                color: this.props.theme.color
+            },
+        })
         const { containerStyle, listStyle, divider, dividerText, inputStyle } = styles;
 
         return (
@@ -56,6 +90,7 @@ class TodoListScreen extends Component {
                             key={todo.id}
                             todoData={todo}
                             id={todo.id}
+                            theme={this.props.theme}
                         />
                      ) }
                 />
@@ -70,6 +105,7 @@ class TodoListScreen extends Component {
                             key={todo.id}
                             todoData={todo}
                             completed
+                            theme={this.props.theme}
                          />
                      ) }
                 />
@@ -80,13 +116,14 @@ class TodoListScreen extends Component {
                     title='New Todo'
                     handleSave={(title, indent) => this.saveTodo( title, indent )}
                     handleClose={method => this.handleClose( method )}
+                    theme={this.props.theme}
                 >
                     <TextInput
                         style={inputStyle}
                         placeholder='Todo Title'
                         value={this.state.title}
                         onChangeText={text => this.handleTitle( text )}
-                        underlineColorAndroid={colors.primeAlt}
+                        underlineColorAndroid={this.props.theme.secondary}
                         autoFocus
                     />
                     <MidnightPicker
@@ -94,55 +131,23 @@ class TodoListScreen extends Component {
                         selectedValue={this.state.priority}
                         onValueChange={value => this.handlePicker( value )}
                         options={[1, 2, 3, 4, 5]}
+                        theme={this.props.theme}
                     />
                 </MidnightModal>
 
-                <FloatingPlus onPress={() => this.handleModal()} />
+                <FloatingPlus onPress={() => this.handleModal()} theme={this.props.theme} />
             </View>
         )
     }
 }
 
-const styles = StyleSheet.create({
-    containerStyle: {
-        flex: 1,
-        backgroundColor: colors.screenBg,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    listStyle: {
-        width: '100%',
-        height: '50%'
-    },
-
-    divider: {
-        width: '100%',
-        height: 30,
-        backgroundColor: colors.primary,
-        justifyContent: 'center',
-        alignItems: 'center',
-        elevation: 1
-    },
-
-    dividerText: {
-        fontSize: 14,
-        color: colors.color
-    },
-
-    inputStyle: {
-        height: 50,
-        fontSize: 20,
-        padding: 10,
-        color: '#fff'
-    },
-})
-
 function mapStateToProps( state ) {
     const { todos } = state.todos;
+    const { theme } = state.theme;
 
     return {
-        todos
+        todos,
+        theme
     };
 }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, Picker, StyleSheet } from 'react-native';
+import colors from '../../colors';
 
 function MidnightPicker({ title, options, selectedValue, onValueChange }) {
-    const { containerStyle, titleStyle, pickerStyle } = styles
+    const { containerStyle, titleStyle, pickerStyle, pickerItemStyle } = styles
 
     let items = options.map( item => {
         return <Picker.Item key={item} label={item + ''} value={item} />
@@ -30,12 +31,13 @@ const styles = StyleSheet.create({
     },
 
     titleStyle: {
-
+        color: colors.color
     },
 
     pickerStyle: {
-        width: '50%'
-    }
+        width: '50%',
+        color: colors.color
+    },
 })
 
 export { MidnightPicker };

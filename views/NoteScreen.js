@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { saveDetails } from '../redux/notesReducer';
+import { KeyboardAvoidingView, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
+import colors from '../colors';
 
 class NoteScreen extends Component {
     static navigationOptions = ({ navigation }) => {
         return {
             title: navigation.getParam( 'note' ).title,
-            headerRight: <Button title='Modal' onPress={() => navigation.navigate('MyModal')} />
+            headerRight: <TouchableOpacity style={{marginRight: 16}} onPress={navigation.getParam( 'onSave' )}><Text style={{color: '#fff'}}>Save</Text></TouchableOpacity>
+            // headerRight: <Button title='Modal' onPress={() => navigation.navigate('MyModal')} />
         }
     }
 
@@ -13,23 +17,41 @@ class NoteScreen extends Component {
         super();
 
         this.state = {
-
+            note: {},
+            newDetails: ''
         }
     }
 
     componentDidMount() {
         this.setState({
-            note: this.props.navigation.getParam( 'note', { title: 'New Note', content: '', indent: 1 } )
+            note: this.props.navigation.getParam( 'note' ),
+            newDetails: this.props.navigation.getParam( 'note' ).details
         })
+        this.props.navigation.setParams({ onSave: this.onSave });
+    }
+
+    onSave = () => {
+        const { newDetails, note: { id } } = this.state
+        this.props.saveDetails( newDetails, id )
+        this.props.navigation.goBack()
     }
 
     render() {
+        const { container, text, inputStyle } = styles
+
         return (
-            <View style={styles.container}>
-                <Text style={styles.text}>This is your note</Text>
-                <Text>{this.props.navigation.getParam('details')}</Text>
-                <Button title='Go back' onPress={() => this.props.navigation.goBack()} />
-            </View>
+            <KeyboardAvoidingView style={container}>
+                <TextInput
+                    multiline={true}
+                    underlineColorAndroid="transparent"
+                    placeholder={'Type your note here'}
+                    placeholderTextColor='#fff6'
+                    value={this.state.newDetails}
+                    onChangeText={text => this.setState({ newDetails: text })}
+                    style={inputStyle}
+                    autoFocus
+                />
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -37,13 +59,25 @@ class NoteScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: colors.screenBg,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
     },
     text: {
         fontSize: 22
+    },
+
+    inputStyle: {
+        width: '100%',
+        paddingTop: 10,
+        paddingRight: 20,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        backgroundColor: colors.screenBg,
+        justifyContent: 'flex-start',
+        fontSize: 18,
+        color: colors.color
     }
 });
 
-export default NoteScreen;
+export default connect( null, { saveDetails } )(NoteScreen);

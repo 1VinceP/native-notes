@@ -1,82 +1,41 @@
 import React, { Component } from 'react';
 import {
     KeyboardAvoidingView,
-    TouchableWithoutFeedback,
     View,
     Text,
-    TextInput,
     Modal,
     StyleSheet,
-    Picker
 } from 'react-native';
-import { MidnightButton, MidnightPicker } from './index';
+import { MidnightButton } from './index';
 
-class MidnightModal extends Component {
-    constructor() {
-        super();
+import colors from '../../colors';
 
-        this.state = {
-            title: '',
-            indentLevel: 1
-        }
+function MidnightModal({ visible, title, handleClose, handleSave, handleModal, children }) {
 
-        this.handleTitle = this.handleTitle.bind(this);
-    }
+    const { modalStyle, containerStyle, titleStyle, titleText, buttonContainer } = styles
 
-    handleTitle( e ) {
-        this.setState({
-            title: e
-        })
-    }
+    return (
+        <Modal
+            animationType='fade'
+            transparent={true}
+            visible={visible}
+            onRequestClose={() => {}}
+            onShow={() => {}}
+        >
+            <KeyboardAvoidingView style={modalStyle}>
+                <View style={containerStyle}>
+                    <View style={titleStyle}><Text style={titleText}>{title}</Text></View>
 
-    handlePicker( value ) {
-        this.setState({ indentLevel: value })
-    }
+                    {children}
 
-    handleClose( method ) {
-        method( this.state.title, this.state.indentLevel );
-        this.setState({
-            title: '',
-            indentLevel: 1
-        })
-    }
-
-    render() {
-        const { modalStyle, containerStyle, titleStyle, titleText, inputStyle, buttonContainer } = styles
-
-        return (
-            <Modal
-                animationType='fade'
-                transparent={true}
-                visible={this.props.visible}
-                onRequestClose={() => {}}
-                onShow={() => {}}
-            >
-                <KeyboardAvoidingView style={modalStyle}>
-                    <View style={containerStyle}>
-                        <View style={titleStyle}><Text style={titleText}>{this.props.title}</Text></View>
-                        <TextInput
-                            style={inputStyle}
-                            placeholder='Note Title'
-                            value={this.state.title}
-                            onChangeText={this.handleTitle}
-                            autoFocus
-                        />
-                        <MidnightPicker
-                            title='Indent Level: '
-                            selectedValue={this.state.indentLevel}
-                            onValueChange={value => this.handlePicker( value )}
-                            options={[1, 2, 3, 4, 5]}
-                        />
-                        <View style={buttonContainer}>
-                            <MidnightButton title='Save' onPress={() => this.handleClose( this.props.handleSave )} />
-                            <MidnightButton title='Cancel' onPress={() => this.handleClose( this.props.handleModal )} />
-                        </View>
+                    <View style={buttonContainer}>
+                        <MidnightButton title='Save' onPress={() => handleClose( handleSave )} />
+                        <MidnightButton title='Cancel' onPress={() => handleClose( handleModal )} />
                     </View>
-                </KeyboardAvoidingView>
-            </Modal>
-        )
-    }
+                </View>
+            </KeyboardAvoidingView>
+        </Modal>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -89,28 +48,22 @@ const styles = StyleSheet.create({
     },
 
     containerStyle: {
-        height: 260,
+        minHeight: 260,
         width: '80%',
-        backgroundColor: '#fff',
+        backgroundColor: colors.screenBg,
         elevation: 5,
         justifyContent: 'space-between'
     },
 
     titleStyle: {
         height: 40,
-        backgroundColor: '#ab47bc',
+        backgroundColor: colors.primeAlt,
         justifyContent: 'center',
         paddingLeft: 10
     },
     titleText: {
         color: '#fff',
         fontSize: 24
-    },
-
-    inputStyle: {
-        height: 50,
-        fontSize: 20,
-        padding: 10
     },
 
     buttonContainer: {

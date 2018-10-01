@@ -1,6 +1,7 @@
 export default {
-    primaryBg: '',
-    secondaryBg: '#ab47bc',
-    screenBg: '#8e8e8e',
-    color: '#fff',
+    primary: '#263238',
+    primeAlt: '#546e7a',
+    secondary: '#765162',
+    screenBg: '#37474f',
+    color: '#FFF',
 }

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 
+import colors from '../../colors'
+
 function FloatingPlus({ onPress }) {
     const { buttonStyle, textStyle } = styles
 
@@ -17,7 +19,7 @@ let styles = StyleSheet.create({
         justifyContent: 'center',
         width: 65,
         height: 65,
-        backgroundColor:'#ab47bc',
+        backgroundColor: colors.primeAlt,
         borderRadius: 100,
         elevation: 5,
         position: 'absolute',

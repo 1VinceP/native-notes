@@ -8,11 +8,13 @@ import Modal from './views/Modal';
 import SettingsScreen from './views/SettingsScreen';
 import TodoListScreen from './views/TodoListScreen';
 
+import colors from './colors';
+
 const options = {
     initialRouteName: 'Home',
     navigationOptions: {
-        headerStyle: { backgroundColor: '#263238' },
-        headerTintColor: '#fff'
+        headerStyle: { backgroundColor: colors.primary },
+        headerTintColor: colors.color
     }
 }
 
@@ -56,14 +58,16 @@ const TabNav = createBottomTabNavigator(
     },
     {
         tabBarOptions: {
-            activeBackgroundColor: '#263238',
-            inactiveBackgroundColor: '#263238',
-            activeTintColor: '#ab47bc'
+            activeBackgroundColor: colors.primary,
+            inactiveBackgroundColor: colors.primary,
+            activeTintColor: colors.color,
+            inactiveTintColor: '#fff4'
         }
     }
 )
 
 export default function App() {
+    console.disableYellowBox = true
 
     return (
         <Provider store={store}>

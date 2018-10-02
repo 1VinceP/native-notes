@@ -1,6 +1,5 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import colors from '../../colors';
 
 function MidnightButton({ title, onPress, theme }) {
     const styles = StyleSheet.create({

@@ -30,7 +30,7 @@ class SettingsScreen extends Component {
         const { containerStyle, buttonContainer } = styles
 
         const options = [
-            'Default', 'iOS', 'Black', 'Zero', 'Schneider', 'Jager'
+            'Default', 'iOS', 'Black', 'Zero', 'Schneider', 'Jager', 'Panzer'
         ]
 
         return (

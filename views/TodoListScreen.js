@@ -5,8 +5,6 @@ import { View, FlatList, StyleSheet, Text, TextInput } from 'react-native';
 import TodoItem from '../components/TodoItem';
 import { FloatingPlus, MidnightModal, MidnightPicker } from '../components/common';
 
-import colors from '../colors';
-
 class TodoListScreen extends Component {
     static navigationOptions = {
         title: 'Todo'

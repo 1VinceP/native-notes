@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import HomeScreen from './views/HomeScreen';
 import NoteScreen from './views/NoteScreen';
-import Modal from './views/Modal';
 import SettingsScreen from './views/SettingsScreen';
 import TodoListScreen from './views/TodoListScreen';
 
@@ -19,22 +18,12 @@ function Main({ theme }) {
         }
     }
 
-    const MainStack = createStackNavigator(
+    const NotesTab = createStackNavigator(
         {
             Home: HomeScreen,
             Note: NoteScreen
         },
         options
-    )
-    const NotesTab = createStackNavigator(
-        {
-            Main: MainStack,
-            MyModal: Modal
-        },
-        {
-            mode: 'modal',
-            headerMode: 'none'
-        }
     )
 
     const TodoTab = createStackNavigator(

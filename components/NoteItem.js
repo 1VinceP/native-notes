@@ -49,7 +49,11 @@ function NoteItem({ noteData, navigation, deleteNote, theme }) {
             onPress={() => navigation( noteData )}
         >
             <TouchableWithoutFeedback onPress={() => deleteNote( noteData.id )}>
-                <Text style={deleteStyle}><Ionicons name='ios-trash-outline' size={26} color={theme.color} /></Text>
+                <View>
+                    <Text style={deleteStyle}>
+                        <Ionicons name='ios-trash-outline' size={26} color={theme.color} />
+                    </Text>
+                </View>
             </TouchableWithoutFeedback>
 
             <Text style={[textStyle, margin]}>{noteData.title}</Text>

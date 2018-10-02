@@ -12,7 +12,6 @@ function TodoItem({ todoData, completed = false, handleComplete, deleteTodo, the
             height: 40,
             backgroundColor: !completed ? theme.secondary : theme.secondary+'55',
             flexDirection: 'row',
-            // justifyContent: 'space-between',
             alignItems: 'center',
             elevation: 5,
             borderWidth: 1,
@@ -51,9 +50,11 @@ function TodoItem({ todoData, completed = false, handleComplete, deleteTodo, the
             onPress={() => handleComplete( todoData.id )}
         >
             <TouchableWithoutFeedback onPress={() => deleteTodo( todoData.id )}>
-                <Text style={deleteStyle}>
-                    <Ionicons name='ios-trash-outline' size={26} color={theme.color} />
-                </Text>
+                <View>
+                    <Text style={deleteStyle}>
+                        <Ionicons name='ios-trash-outline' size={26} color={theme.color} />
+                    </Text>
+                </View>
             </TouchableWithoutFeedback>
             <Text style={textStyle}>{priority} {todoData.title}</Text>
         </TouchableOpacity>

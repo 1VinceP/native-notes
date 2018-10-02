@@ -8,7 +8,6 @@ class NoteScreen extends Component {
         return {
             title: navigation.getParam( 'note' ).title,
             headerRight: <TouchableOpacity style={{marginRight: 16}} onPress={navigation.getParam( 'onSave' )}><Text style={{color: navigation.getParam( 'color' )}}>Save</Text></TouchableOpacity>
-            // headerRight: <Button title='Modal' onPress={() => navigation.navigate('MyModal')} />
         }
     }
 

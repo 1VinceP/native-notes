@@ -65,7 +65,6 @@ function Main({ theme }) {
                     if( routeName === 'Notes' )
                         iconName = `ios-paper${focused ? '' : '-outline'}`
                     else if( routeName === 'Todo' )
-                        // iconName = `md-checkmark-circle${focused ? '' : '-outline'}`
                         iconName = `ios-list${focused ? '' : '-outline'}`
                     else if( routeName === 'Settings' )
                         iconName = `ios-settings${focused ? '' : '-outline'}`

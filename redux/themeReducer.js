@@ -51,12 +51,21 @@ const themeOptions = {
         color: '#000000',
         tintColor: '#ffffff',
         navColor: '#a4c8e8'
+    },
+
+    panzer: {
+        primary: '#6F8674',
+        secondary: '#a4c8e8',
+        screenBg: '#eeeeee',
+        color: '#000000',
+        tintColor: '#ffffff',
+        navColor: '#CC4353'
     }
 }
 
 const initialState = {
-    themeTitle: 'Default',
-    theme: themeOptions.default
+    themeTitle: 'Panzer',
+    theme: themeOptions.panzer
 }
 
 const UPDATE_THEME = 'UPDATE_THEME'
